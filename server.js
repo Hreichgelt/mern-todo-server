@@ -8,6 +8,12 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true })
     db.on('error', (error) => console.error(error))
     db.once('open', () => console.log('Connected to Database'))
 
+app.use(express.json())
+
+const todoRouter = require('../routes/api/todoRoutes');
+app.use('/todoRoutes', todoRouter)
+// 'localhost:3000/todoRoutes'
+
 app.listen(3000, () => {
     console.log('Server running')
 });
