@@ -1,0 +1,9 @@
+GET http://localhost:3000/todo
+
+###
+
+POST http://localhost:3000/todo
+
+###
+
+GET http://localhost:3000/todo/99
