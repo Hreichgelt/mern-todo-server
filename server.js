@@ -10,7 +10,7 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true })
 
 app.use(express.json())
 
-const todoRouter = require('../routes/api/todoRoutes');
+const todoRouter = require('routes/api/todoRoutes.js');
 app.use('/todoRoutes', todoRouter)
 // 'localhost:3000/todoRoutes'
 
