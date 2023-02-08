@@ -1,4 +1,8 @@
-const router = require('express').Router();
+// const router = require('express').Router(); - import express - call express router - then assign express.router to the variable router
+
+import express from 'express'
+const router = express.Router();
+import todoModel from '../models/todo.js'
 
 // for individual routes - 
 // Get all
@@ -12,8 +16,15 @@ router.get('/:id', (req, res) => {
 res.send(req.params.id)
 })
 
-// create to-do one at a time 
-router.post('/', (req, res) => {
+// create to-do one at a time https://localhost:3000/todo
+router.post('/', async (req, res) => {
+    const todo = new todoModel({
+        title: 'Banger',
+        description: 'shred the gnar'
+    });
+
+    await todo.save();
+
     res.send('hotboggies')
 })
 
@@ -27,4 +38,4 @@ router.delete('/:id', (req, res) => {
 // test endpoints 
 
 
-module.exports = router
+export default router;

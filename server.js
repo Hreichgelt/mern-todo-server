@@ -1,7 +1,11 @@
-require('dotenv').config();
-const express = require('express');
+// require('dotenv').config(); - in es6 it becomes the following - imports and then calls function 
+import dotenv from 'dotenv'
+import express from 'express'
+import mongoose from 'mongoose';
+import todoRouter from './routes/todo.js';
+
+dotenv.config();
 const app = express();
-const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true })
     const db = mongoose.connection
@@ -10,7 +14,6 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true })
 
 app.use(express.json())
 
-const todoRouter = require('./routes/todo');
 app.use('/todo', todoRouter)
 // 'localhost:3000/todoRoutes'
 

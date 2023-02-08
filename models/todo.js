@@ -1,22 +1,6 @@
-const mongoose = require(mongoose);
+import mongoose from "mongoose";
+import todoSchema from "../schemas/todo.js";
 
-const todoSchema = new mongoose.Schema ({
-title: {
+const todo = mongoose.model('todo', todoSchema);
 
-},
-description: {
-
-},
-due: {
-
-},
-completed: {
-
-},
-deleted: {
-
-},
-createdAt: {
-    
-}
-})
+export default todo;
