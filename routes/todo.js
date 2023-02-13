@@ -7,25 +7,33 @@ import todoModel from '../models/todo.js'
 // for individual routes - 
 // Get all
 router.get('/', async (req, res) => {
-
-
-})
+    const todo = await todoModel.find(
+        res.send(todoModel)
+    )
+});
 
 // get one 
-router.get('/:id', (req, res) => {
-res.send(req.params.id)
+router.get('/:id', async (req, res) => {
+const todo = await todoModel.getOne({
+  id: req.params._id
+});
+res.send('Here it is mothafucka')
 })
 
 // create to-do one at a time https://localhost:3000/todo
 router.post('/', async (req, res) => {
-    const todo = new todoModel({
-        title: 'Banger',
-        description: 'shred the gnar'
-    });
+    const newTodo = new todoModel();
+        newTodo.TodoId = req.body.TodoId;
+        newTodo.title = req.body.title;
+        newTodo.description = req.body.description;
+        newTodo.dueAt = req.body.dueAt;
+        newTodo.createdAt = req.body.createdAt;
+        newTodo.completedAt = req.body.completedAt;
+        newTodo.deletedAt = req.body.deletedAt;
 
-    await todo.save();
+    await newTodo.save();
 
-    res.send('hotboggies')
+    res.send('Data Inserted')
 });
 
 // delete one at a time 
@@ -34,7 +42,6 @@ const todo = await todoModel.deleteOne({
     id: req.params._id
 });
 
-// await todo.delete();
 res.send('that bitch is deleted!')
 })
 
