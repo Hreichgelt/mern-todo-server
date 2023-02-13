@@ -7,7 +7,7 @@ import todoModel from '../models/todo.js'
 // for individual routes - 
 // Get all
 router.get('/', async (req, res) => {
-// test get route 
+
 
 })
 
@@ -26,12 +26,19 @@ router.post('/', async (req, res) => {
     await todo.save();
 
     res.send('hotboggies')
-})
+});
 
 // delete one at a time 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
+const todo = await todoModel.deleteOne({
+    id: req.params._id
+});
 
+// await todo.delete();
+res.send('that bitch is deleted!')
 })
+
+
 // not implementing update yet
 // use Insomnia to test 
 // check db from compass to see db changes 

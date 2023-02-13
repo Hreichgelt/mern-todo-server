@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import todoSchema from "../schemas/todo.js";
 
-const todo = mongoose.model('todo', todoSchema);
+const todoModel = mongoose.model('todo', todoSchema);
 
-export default todo;
+export default todoModel;
