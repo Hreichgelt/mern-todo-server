@@ -6,11 +6,15 @@ import todoModel from '../models/todo.js'
 
 // for individual routes - 
 // Get all
-router.get('/', async (req, res) => {
-    const todo = await todoModel.find(
-        res.send(todoModel)
-    )
-});
+router.route('/').get( (req, res) => {
+    todoModel.find((err, todo) => {
+        if(err)
+            console.log(err);
+        else {
+            res.json(todo)
+        }
+    })
+})
 
 // get one 
 router.get('/:id', async (req, res) => {
