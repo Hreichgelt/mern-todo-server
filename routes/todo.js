@@ -17,11 +17,11 @@ router.route('/').get( (req, res) => {
 })
 
 // get one 
-router.get('/:id', async (req, res) => {
-const todo = await todoModel.getOne({
-  id: req.params._id
-});
-res.send('Here it is mothafucka')
+router.route('/:id').get((req, res) => {
+    const id = req.params.id;
+    todoModel.findById(id, (err, todo) => {
+        res.json(todo)
+    })
 })
 
 // create to-do one at a time https://localhost:3000/todo
