@@ -4,7 +4,7 @@ import express from 'express'
 const router = express.Router();
 import todoModel from '../models/todo.js'
 
-// for individual routes - 
+// for individual routes - BRAD - why did I keep seeing the router.route().get??
 // Get all
 router.route('/').get( (req, res) => {
     todoModel.find((err, todo) => {
@@ -25,18 +25,16 @@ router.route('/:id').get((req, res) => {
 })
 
 // create to-do one at a time https://localhost:3000/todo
-router.post('/', async (req, res) => {
-    const newTodo = new todoModel();
-        newTodo.TodoId = req.body.TodoId;
-        newTodo.title = req.body.title;
-        newTodo.description = req.body.description;
-        newTodo.dueAt = req.body.dueAt;
-        newTodo.createdAt = req.body.createdAt;
-        newTodo.completedAt = req.body.completedAt;
-        newTodo.deletedAt = req.body.deletedAt;
+// as is only kicking ID into DB
+router.post('/', (req, res) => {
+    console.log(req.body)
+    const newTodo = new todoModel({
+        title: req.body.title,
+        description: req.body.description,
+        dueAt: req.body.dueAt
+    });
 
-    await newTodo.save();
-
+    newTodo.save();
     res.send('Data Inserted')
 });
 
@@ -54,6 +52,13 @@ res.send('that bitch is deleted!')
 // use Insomnia to test 
 // check db from compass to see db changes 
 // test endpoints 
+       // newTodo.TodoId = req.body.TodoId;
+        // newTodo.title = req.body.title;
+        // newTodo.description = req.body.description;
+        // newTodo.dueAt = req.body.dueAt;
+        // newTodo.createdAt = req.body.createdAt;
+        // newTodo.completedAt = req.body.completedAt;
+        // newTodo.deletedAt = req.body.deletedAt;
 
 
 export default router;
