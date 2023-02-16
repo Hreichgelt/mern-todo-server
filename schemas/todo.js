@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const todoSchema = new mongoose.Schema ({
-title: String,
+title: {type: String, unique: true},
 description: String,
 dueAt: Date,
 completedAt: Date,

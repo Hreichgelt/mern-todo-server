@@ -4,12 +4,14 @@ import express from 'express'
 const router = express.Router();
 import todoModel from '../models/todo.js'
 
-// for individual routes - BRAD - why did I keep seeing the router.route().get??
+// for individual routes
 // Get all
-router.route('/').get( (req, res) => {
+router.get('/', (req, res) => {
     todoModel.find((err, todo) => {
-        if(err)
-            console.log(err);
+        if(err) {
+            console.log(err)
+            res.status(500).send();
+        }
         else {
             res.json(todo)
         }
@@ -17,7 +19,7 @@ router.route('/').get( (req, res) => {
 })
 
 // get one 
-router.route('/:id').get((req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id;
     todoModel.findById(id, (err, todo) => {
         res.json(todo)
@@ -26,7 +28,7 @@ router.route('/:id').get((req, res) => {
 
 // create to-do one at a time https://localhost:3000/todo
 // as is only kicking ID into DB
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     console.log(req.body)
     const newTodo = new todoModel({
         title: req.body.title,
@@ -34,7 +36,11 @@ router.post('/', (req, res) => {
         dueAt: req.body.dueAt
     });
 
-    newTodo.save();
+    try { 
+       await newTodo.save()
+    } catch (err) {
+        console.log(err)
+    }
     res.send('Data Inserted')
 });
 
