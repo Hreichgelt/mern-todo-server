@@ -53,6 +53,18 @@ const todo = await todoModel.deleteOne({
 res.send('that bitch is deleted!')
 })
 
+// edit/update by id 
+router.put('/:id', async (req, res) => {
+    const completedTodo =  await todoModel.findByIdAndUpdate({
+        id: req.params._id,
+        title: req.body.title,
+        description: req.body.description,
+        completedAt: req.body.dueAt
+    });
+
+    res.send('Todo has been updated!')
+})
+
 
 // not implementing update yet
 // use Insomnia to test 

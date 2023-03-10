@@ -5,6 +5,9 @@ import mongoose from 'mongoose';
 import todoRouter from './routes/todo.js';
 import cors from 'cors'
 
+const port = 8080
+
+
 dotenv.config();
 const app = express();
 
@@ -20,7 +23,7 @@ app.use(express.json())
 app.use('/todo', todoRouter)
 // 'localhost:3000/todoRoutes'
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server running')
 });
 
