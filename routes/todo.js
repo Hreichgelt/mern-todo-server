@@ -55,11 +55,11 @@ res.send('that bitch is deleted!')
 
 // edit/update by id 
 router.put('/:id', async (req, res) => {
-    const completedTodo =  await todoModel.findByIdAndUpdate({
-        id: req.params._id,
+    console.log(req.body)
+    const completedTodo =  await todoModel.findByIdAndUpdate( req.params.id, {
         title: req.body.title,
         description: req.body.description,
-        completedAt: req.body.dueAt
+        completedAt: req.body.completedAt
     });
 
     res.send('Todo has been updated!')

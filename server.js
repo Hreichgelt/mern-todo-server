@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import todoRouter from './routes/todo.js';
 import cors from 'cors'
 
-const port = 8080
+const port = 9000
 
 
 dotenv.config();
